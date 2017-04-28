@@ -1,5 +1,7 @@
 #include "MainMenuScreen.hpp"
+#include "GameScreen.hpp"
 
+#include "Globals.hpp"
 #include <SFGUI\Widgets.hpp>
 
 namespace FlappyBirdClone
@@ -21,18 +23,18 @@ namespace FlappyBirdClone
 		Screen::Update(delta);
 	}
 
-	void MainMenuScreen::ProcessEvent(sf::Event& event)
+	void MainMenuScreen::ProcessEvent(sf::Event& event, sf::RenderWindow& window)
 	{
-		Screen::ProcessEvent(event);
+		Screen::ProcessEvent(event, window);
 	}
 
 	void MainMenuScreen::Render(sf::RenderWindow& window)
 	{
-		
+		Screen::Render(window);
 	}
 
 	void MainMenuScreen::StartGame()
 	{
-
+		Globals::App->Create<GameScreen>();
 	}
 }

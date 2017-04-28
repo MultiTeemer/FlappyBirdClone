@@ -79,7 +79,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\SFML\include;$(SolutionDir)\SFGUI\include;$(SolutionDir)\Box2D\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\SFML\include;$(SolutionDir)\SFGUI\include;D:\Works\C++\flappybirdclone\Box2D\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -177,9 +177,11 @@ copy /Y "$(SolutionDir)SFGUI\bin\*.dll" "$(TargetDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />
+    <ClInclude Include="Box2dConverter.hpp" />
     <ClInclude Include="GameScreen.hpp" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="MainMenuScreen.hpp" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="Screen.hpp" />
     <ClInclude Include="Ui.h" />
   </ItemGroup>

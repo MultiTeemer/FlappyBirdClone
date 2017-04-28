@@ -46,7 +46,7 @@ namespace FlappyBirdClone
 			Ui.Update(delta);
 		}
 		
-		virtual void ProcessEvent(sf::Event& event)
+		virtual void ProcessEvent(sf::Event& event, sf::RenderWindow& window)
 		{
 			Ui.ProcessEvent(event);
 		}

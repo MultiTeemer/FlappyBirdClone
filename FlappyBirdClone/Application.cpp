@@ -14,7 +14,9 @@ namespace FlappyBirdClone
 
 	Application::Application()
 		: window(sf::VideoMode(1024, 768), "Flappy bird", sf::Style::Default)
-	{}
+	{
+		window.setVerticalSyncEnabled(true);
+	}
 
 	void Application::Run(int fps)
 	{
@@ -72,8 +74,9 @@ namespace FlappyBirdClone
 			}
 		}
 
-		for (auto& screen_ptr : Screen::Screens) {
-			screen_ptr->ProcessEvent(event);
+		auto screens = Screen::Screens;
+		for (auto& screen_ptr : screens) {
+			screen_ptr->ProcessEvent(event, window);
 		}
 	}
 }
