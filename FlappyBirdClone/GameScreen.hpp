@@ -14,7 +14,7 @@ namespace FlappyBirdClone
 	public:
 		virtual void Update(float delta);
 		virtual void Render(sf::RenderWindow& window);
-		virtual void InitGui(sf::RenderWindow& window);
+		virtual void Initialize(sf::RenderWindow& window);
 		virtual void ProcessEvent(sf::Event& event, sf::RenderWindow& window);
 
 		GameScreen();

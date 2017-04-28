@@ -6,9 +6,9 @@
 
 namespace FlappyBirdClone
 {
-	void MainMenuScreen::InitGui(sf::RenderWindow& window)
+	void MainMenuScreen::Initialize(sf::RenderWindow& window)
 	{
-		Screen::InitGui(window);
+		Screen::Initialize(window);
 
 		auto startGameBtn = Ui.Add<sfg::Button>(playButtonId, "Play");
 		auto screenSize = window.getSize();

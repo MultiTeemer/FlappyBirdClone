@@ -26,7 +26,7 @@ namespace FlappyBirdClone
 		std::shared_ptr<ScreenT> Create(Args&&... args)
 		{
 			auto* screen = new ScreenT(std::forward<Args>(args)...);
-			screen->InitGui(window);
+			screen->Initialize(window);
 			return std::static_pointer_cast<ScreenT>(Screen::Screens.back());
 		}
 

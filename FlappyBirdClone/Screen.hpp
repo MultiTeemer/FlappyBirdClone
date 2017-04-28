@@ -39,7 +39,7 @@ namespace FlappyBirdClone
 		}
 		
 		virtual void Render(sf::RenderWindow& window) {}
-		virtual void InitGui(sf::RenderWindow& window) {}
+		virtual void Initialize(sf::RenderWindow& window) {}
 
 		virtual void Update(float delta)
 		{
