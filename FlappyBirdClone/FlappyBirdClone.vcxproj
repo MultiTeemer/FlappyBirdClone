@@ -170,10 +170,15 @@ copy /Y "$(SolutionDir)SFGUI\bin\*.dll" "$(TargetDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="FailedState.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="JustFailedState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
+    <ClCompile Include="PausedState.cpp" />
+    <ClCompile Include="PlayingState.cpp" />
+    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />

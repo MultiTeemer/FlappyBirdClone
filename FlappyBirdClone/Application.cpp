@@ -61,7 +61,7 @@ namespace FlappyBirdClone
 			s->Render(window);
 			s->RenderGui(window, gui);
 		}
-
+		
 		window.display();
 	}
 

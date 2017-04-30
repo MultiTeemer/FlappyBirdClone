@@ -3,6 +3,7 @@
 #include "Ui.h"
 #include <vector>
 #include <memory>
+#include <functional>
 #include <SFML\Graphics.hpp>
 #include <SFGUI\SFGUI.hpp>
 
@@ -21,6 +22,16 @@ namespace FlappyBirdClone
 			gui.Display(window);
 		}
 
+		void SelfRemoveFromActiveScreens()
+		{
+			auto it = std::find_if(Screens.begin(), Screens.end(), [this](const std::shared_ptr<Screen>& ptr) -> bool {
+				return ptr.get() == this;
+			});
+			if (it != Screens.end()) {
+				Screens.erase(it);
+			}
+		}
+
 	protected:
 		Ui Ui;
 
@@ -32,10 +43,12 @@ namespace FlappyBirdClone
 	public:
 		virtual ~Screen()
 		{
-			auto it = std::find_if(Screens.begin(), Screens.end(), [this](const std::shared_ptr<Screen>& ptr) -> bool {
-				return ptr.get() == this;
-			});
-			Screens.erase(it);
+			SelfRemoveFromActiveScreens();
+		}
+
+		virtual void Close()
+		{
+			SelfRemoveFromActiveScreens();
 		}
 		
 		virtual void Render(sf::RenderWindow& window) {}

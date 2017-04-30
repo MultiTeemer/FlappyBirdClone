@@ -8,47 +8,23 @@ namespace FlappyBirdClone
 {
 	GameScreen::GameScreen()
 		:
-		world(b2Vec2(0, 9.8f)),
-		prevPos(b2Vec2_zero)
-	{
-	}
+		data{ b2Vec2(0, 9.8f) },
+		currentState(nullptr)
+	{}
 
 	void GameScreen::Update(float delta)
 	{
-		world.Step(delta, 10, 10);
+		Screen::Update(delta);
 
-		auto dy = player.body->GetPosition().y - prevPos.y;
-
-		if (dy > 0 && prevPos.y != 0)
-		player.body->ApplyAngularImpulse(dy * delta * 200, true);
-
-		auto rot = player.body->GetAngle();
-		rot = rot > 1 ? 1 : rot;
-		rot = rot < -1 ? -1 : rot;
-
-		player.body->SetTransform(player.body->GetWorldCenter(), rot);
-		
-		prevPos = player.body->GetPosition();
-
-		auto l = player.body->GetContactList();
-		if (l != nullptr) {
-			auto b = l->contact->GetFixtureA()->GetBody();
-			if (b == player.body) {
-				b = l->contact->GetFixtureB()->GetBody();
-			}
-
-			if (b == bodies.front()) {
-				std::cout << "game failed!" << std::endl;
-			}
-		}
+		currentState->Update(delta);
 	}
 
 	void GameScreen::Render(sf::RenderWindow& window)
 	{
 		Screen::Render(window);
 
-		for (b2Body* body = world.GetBodyList(); body != nullptr; body = body->GetNext()) {
-			sf::Shape* shape = static_cast<sf::Shape*>(body->GetUserData());
+		for (b2Body* body = data.world.GetBodyList(); body != nullptr; body = body->GetNext()) {
+			auto shape = static_cast<sf::Shape*>(body->GetUserData());
 			shape->setPosition(Converter::MetersToPixels(body->GetPosition().x), Converter::MetersToPixels(body->GetPosition().y));
 			shape->setRotation(Converter::RadToDeg<double>(body->GetAngle()));
 			window.draw(*shape);
@@ -59,39 +35,92 @@ namespace FlappyBirdClone
 	{
 		Screen::Initialize(window);
 
-		bodies.push_back(createBox(
-			world,
+		InitializeGui(window);
+		InitializeWorld(window);		
+	
+		SetState<PlayingState>();
+	}
+
+	void GameScreen::ProcessEvent(sf::Event& event, sf::RenderWindow& window)
+	{
+		Screen::ProcessEvent(event, window);
+
+		currentState->ProcessEvent(event);
+	}
+
+	void GameScreen::InitializeGui(sf::RenderWindow& window)
+	{
+		auto scoreLabel = Ui.Add<sfg::Label>(scoreLabelId, std::to_string(data.score));
+		scoreLabel->SetPosition(sf::Vector2f(5, 5));
+
+		const auto windowCenter = window.getDefaultView().getCenter();
+
+		auto gamePausedLabel = Ui.Add<sfg::Label>(gamePausedLabelId, "PAUSED");
+		gamePausedLabel->SetPosition(windowCenter);
+		
+		const int boxWidth = 400;
+		const int boxHeight = 300;
+
+		auto recapWindow = Ui.Add<sfg::Window>(recapWindowId);
+		recapWindow->SetTitle("Game Over");
+		recapWindow->SetPosition(sf::Vector2f(windowCenter.x - boxWidth / 2, windowCenter.y - boxHeight / 2));
+
+		auto recapScoreLabel = Ui.Create<sfg::Label>("Your score:");
+		auto recapScore = Ui.Add<sfg::Label>(recapScoreLabelId);
+		auto b1 = Ui.Wrap({ recapScoreLabel, recapScore }, sfg::Box::Orientation::HORIZONTAL);
+
+		auto bestScoreLabel = Ui.Create<sfg::Label>("Best score:");
+		auto bestScore = Ui.Add<sfg::Label>(bestScoreLabelId);
+		auto b2 = Ui.Wrap({ bestScoreLabel, bestScore }, sfg::Box::Orientation::HORIZONTAL);
+
+		auto toMainMenuButton = Ui.Add<sfg::Button>(toMainMenuButtonId, "Main Menu");
+		toMainMenuButton->GetSignal(sfg::Button::OnLeftClick).Connect([this] { this->ReturnToMainMenu(); });
+
+		auto recapBox = Ui.Wrap({ b1, b2, toMainMenuButton }, sfg::Box::Orientation::VERTICAL, 15);
+
+		recapBox->SetRequisition(sf::Vector2f(boxWidth, boxHeight));
+
+		recapWindow->Add(recapBox);
+	}
+
+	void GameScreen::InitializeWorld(sf::RenderWindow& window)
+	{
+		data.bottomBorder = createBox(
+			data.world,
 			window.getSize().x / 2,
 			window.getSize().y,
 			8000,
 			40,
 			b2BodyType::b2_staticBody
-		));
-
-		player.body = createBox(world,
+		);
+		data.topBorder = createBox(
+			data.world,
 			window.getSize().x / 2,
+			20,
+			8000,
+			40,
+			b2BodyType::b2_staticBody
+		);
+
+		data.player.body = createBox(
+			data.world,
+			window.getSize().x / 3,
 			window.getSize().y / 2,
 			60,
 			40,
-			b2BodyType::b2_dynamicBody);
+			b2BodyType::b2_dynamicBody
+		);
 
-		bodies.push_back(player.body);
+		data.bodies.push_back(data.player.body);
 	}
 
-	void GameScreen::ProcessEvent(sf::Event& event, sf::RenderWindow& window)
+	void GameScreen::ReturnToMainMenu()
 	{
-		if (event.type == sf::Event::EventType::KeyReleased) {
-			if (event.key.code == sf::Keyboard::Space) {
-				player.body->SetLinearVelocity(b2Vec2(0, 0));
-				player.body->SetAngularVelocity(0);
-				player.body->ApplyLinearImpulseToCenter(b2Vec2(0, -160), false);
-				player.body->ApplyAngularImpulse(-10, true);
-			}
-		}
+		Globals::App->Create<MainMenuScreen>();
+		Close();
 	}
 
-	b2Body* GameScreen::createBox(b2World& world, int pos_x, int pos_y, int size_x, int
-		size_y, b2BodyType type)
+	b2Body* GameScreen::createBox(b2World& world, int pos_x, int pos_y, int size_x, int size_y, b2BodyType type)
 	{
 		b2BodyDef bodyDef;
 		bodyDef.position.Set(Converter::PixelsToMeters<double>(pos_x),

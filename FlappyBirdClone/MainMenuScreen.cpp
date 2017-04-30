@@ -36,5 +36,6 @@ namespace FlappyBirdClone
 	void MainMenuScreen::StartGame()
 	{
 		Globals::App->Create<GameScreen>();
+		Close();
 	}
 }

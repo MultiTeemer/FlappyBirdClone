@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Screens\GameScreenStuff">
       <UniqueIdentifier>{7e4c4bc6-0f70-42d8-ab8a-d2fdef073f77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Screens\GameScreenStuff">
+      <UniqueIdentifier>{0285ccdb-5ef2-4806-bb24-afe19f08d2d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +41,21 @@
     </ClCompile>
     <ClCompile Include="MainMenuScreen.cpp">
       <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingState.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="JustFailedState.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="PausedState.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="FailedState.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

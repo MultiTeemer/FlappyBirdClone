@@ -22,6 +22,12 @@ namespace FlappyBirdClone
 			return res;
 		}
 
+		template <typename Widget, typename ...Args>
+		std::shared_ptr<Widget> Create(Args&&... args)
+		{
+			return Widget::Create(std::forward<Args>(args)...);
+		}
+
 		template <typename Widget>
 		std::shared_ptr<Widget> Get(int id)
 		{
@@ -30,6 +36,17 @@ namespace FlappyBirdClone
 			}
 
 			return std::static_pointer_cast<Widget>(elements[id]);
+		}
+
+		sfg::Box::Ptr Wrap(std::initializer_list<sfg::Widget::Ptr> widgets, sfg::Box::Orientation orientation, float spacing = 0)
+		{
+			auto& box = Create<sfg::Box>(orientation, spacing);
+			
+			for (auto& widget : widgets) {
+				box->Pack(widget);
+			}
+
+			return box;
 		}
 
 		void Update(float delta)
