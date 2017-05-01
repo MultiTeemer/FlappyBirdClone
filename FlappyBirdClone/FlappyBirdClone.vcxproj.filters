@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Screens\GameScreenStuff">
       <UniqueIdentifier>{0285ccdb-5ef2-4806-bb24-afe19f08d2d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Screens\GameScreenStuff\States">
+      <UniqueIdentifier>{5e2ba052-8933-4b76-93bd-47504bfd5d3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,16 +48,28 @@
     <ClCompile Include="State.cpp">
       <Filter>Source Files\Screens\GameScreenStuff</Filter>
     </ClCompile>
-    <ClCompile Include="PlayingState.cpp">
+    <ClCompile Include="GameWorld.cpp">
       <Filter>Source Files\Screens\GameScreenStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingState.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff\States</Filter>
     </ClCompile>
     <ClCompile Include="JustFailedState.cpp">
-      <Filter>Source Files\Screens\GameScreenStuff</Filter>
+      <Filter>Source Files\Screens\GameScreenStuff\States</Filter>
     </ClCompile>
     <ClCompile Include="PausedState.cpp">
-      <Filter>Source Files\Screens\GameScreenStuff</Filter>
+      <Filter>Source Files\Screens\GameScreenStuff\States</Filter>
     </ClCompile>
     <ClCompile Include="FailedState.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstaclesManager.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Source Files\Screens\GameScreenStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="RangeMapper.cpp">
       <Filter>Source Files\Screens\GameScreenStuff</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,8 +95,20 @@
     <ClInclude Include="Box2dConverter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.hpp">
+    <ClInclude Include="GameWorld.h">
       <Filter>Header Files\Screens\GameScreenStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstaclesManager.hpp">
+      <Filter>Header Files\Screens\GameScreenStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.hpp">
+      <Filter>Header Files\Screens\GameScreenStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="RangeMapper.hpp">
+      <Filter>Header Files\Screens\GameScreenStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

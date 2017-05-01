@@ -13,7 +13,7 @@ namespace FlappyBirdClone
 	std::unique_ptr<Application> Application::Instance = std::unique_ptr<Application>();
 
 	Application::Application()
-		: window(sf::VideoMode(1024, 768), "Flappy bird", sf::Style::Default)
+		: window(sf::VideoMode(1024, 768), "Flappy bird", sf::Style::Close)
 	{
 		window.setVerticalSyncEnabled(true);
 	}

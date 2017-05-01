@@ -6,8 +6,8 @@ namespace FlappyBirdClone
 		:
 		State(screen)
 	{
-		screen.data.player.body->SetAngularVelocity(0);
-		screen.data.player.body->SetLinearVelocity(b2Vec2_zero);
+		screen.gameWorld.player.body->SetAngularVelocity(0);
+		screen.gameWorld.player.body->SetLinearVelocity(b2Vec2_zero);
 	}
 
 	void GameScreen::PausedState::Update(float delta)

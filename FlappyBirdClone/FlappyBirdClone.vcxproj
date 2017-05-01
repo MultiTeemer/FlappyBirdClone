@@ -172,23 +172,31 @@ copy /Y "$(SolutionDir)SFGUI\bin\*.dll" "$(TargetDir)"</Command>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="FailedState.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="JustFailedState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="ObstaclesManager.cpp" />
     <ClCompile Include="PausedState.cpp" />
     <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="RangeMapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="Box2dConverter.hpp" />
     <ClInclude Include="GameScreen.hpp" />
+    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="MainMenuScreen.hpp" />
-    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="Obstacle.hpp" />
+    <ClInclude Include="ObstaclesManager.hpp" />
+    <ClInclude Include="RangeMapper.hpp" />
     <ClInclude Include="Screen.hpp" />
     <ClInclude Include="Ui.h" />
+    <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

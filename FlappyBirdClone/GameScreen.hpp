@@ -2,7 +2,7 @@
 
 #include "Screen.hpp"
 #include "MainMenuScreen.hpp"
-#include "Player.hpp"
+#include "GameWorld.h"
 #include "Globals.hpp"
 
 #include <vector>
@@ -23,6 +23,8 @@ namespace FlappyBirdClone
 		GameScreen();
 
 	private:
+		static const float playerSpeed;
+
 		struct State
 		{
 			virtual void Update(float delta);
@@ -42,22 +44,12 @@ namespace FlappyBirdClone
 		static const int bestScoreLabelId = 4;
 		static const int toMainMenuButtonId = 5;
 
-		struct GameWorld
-		{
-			b2World world;
-			b2Body* topBorder;
-			b2Body* bottomBorder;
-			std::vector<b2Body*> bodies;
-			Player player;
-			int score;
-		} data;
+		GameWorld gameWorld;
 
 		State* currentState;
 		
 		void InitializeGui(sf::RenderWindow& window);
-		void InitializeWorld(sf::RenderWindow& window);
 		void ReturnToMainMenu();
-		b2Body* createBox(b2World& world, int pos_x, int pos_y, int size_x, int size_y, b2BodyType type = b2_dynamicBody);
 
 		template <typename StateT>
 		void SetState()
@@ -73,6 +65,12 @@ namespace FlappyBirdClone
 			virtual void Update(float delta);
 			virtual void ProcessEvent(sf::Event& event);
 			virtual void OnSet();
+		
+		private:
+			void AdvanceProgress(float delta, float speed);
+			void CheckFail();
+			void CheckObstaclesPassing();
+			void UpdateWorld(float delta);
 		};
 
 		struct PausedState : public State

@@ -4,5 +4,5 @@ namespace FlappyBirdClone
 {
 	Application* Globals::App = nullptr;
 
-	int Globals::BestScore = 0;
+	unsigned Globals::BestScore = 0;
 }
