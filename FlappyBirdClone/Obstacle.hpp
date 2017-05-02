@@ -7,7 +7,7 @@ namespace FlappyBirdClone
 	struct Obstacle
 	{
 		static const int Width = 50;
-		static const int PassageHeight = 250;
+		static const int PassageHeight = 210;
 
 		b2Body* topBody = nullptr;
 		b2Body* bottomBody = nullptr;

@@ -24,21 +24,21 @@ namespace FlappyBirdClone
 		bottomBorder = createBox(
 			size.x / 2,
 			size.y,
-			size.x + 50,
+			size.x * 2,
 			40
 		);
 		topBorder = createBox(
 			size.x / 2,
 			20,
-			size.x + 50,
+			size.x * 2,
 			40
 		);
 
 		player.body = createBox(
 			0,
 			size.y / 2,
-			30,
-			20,
+			40,
+			35,
 			b2BodyType::b2_dynamicBody
 		);
 
@@ -98,8 +98,8 @@ namespace FlappyBirdClone
 			Converter::PixelsToMeters<double>(size_y / 2.0)
 		);
 		b2FixtureDef fixtureDef;
-		fixtureDef.density = 60;
-		fixtureDef.friction = 20;
+		fixtureDef.density = 20;
+		fixtureDef.friction = 10;
 		fixtureDef.restitution = 0.01;
 		fixtureDef.shape = &b2shape;
 		b2Body* res = world.CreateBody(&bodyDef);

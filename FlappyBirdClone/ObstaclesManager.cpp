@@ -70,7 +70,7 @@ namespace FlappyBirdClone
 
 	bool ObstaclesManager::MayBeEmitObstacle(float position) const
 	{
-		const auto clearZone = Obstacle::Width / 2.f + 300;
+		const auto clearZone = Obstacle::Width / 2.f + 220;
 		const auto distanceToLastObstacle = CalcDistanceToLastObstacle(position);
 
 		if (distanceToLastObstacle < 0 || distanceToLastObstacle <= clearZone) {
@@ -124,10 +124,12 @@ namespace FlappyBirdClone
 
 		RangeMapper lastObstaclePassageWeight;
 		lastObstaclePassageWeight[Obstacle::Width] = 1.f;
-		lastObstaclePassageWeight[Obstacle::Width * 2] = 0.5f;
-		lastObstaclePassageWeight[200] = 0.4f;
-		lastObstaclePassageWeight[300] = 0.3f;
-		lastObstaclePassageWeight[500] = 0.1f;
+		lastObstaclePassageWeight[Obstacle::Width * 2] = 0.9f;
+		lastObstaclePassageWeight[200] = 0.75f;
+		lastObstaclePassageWeight[300] = 0.5f;
+		lastObstaclePassageWeight[700] = 0.4f;
+		lastObstaclePassageWeight[1000] = 0.3f;
+		lastObstaclePassageWeight[1100] = 0.1f;
 		lastObstaclePassageWeight[std::numeric_limits<float>::infinity()] = 0;
 
 		const auto dispersion = maxPassageDispersion * (1 - lastObstaclePassageWeight(distanceToLastObstacle));
