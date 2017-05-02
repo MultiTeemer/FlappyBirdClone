@@ -80,7 +80,11 @@ namespace FlappyBirdClone
 	{
 		auto l = screen.gameWorld.player.body->GetContactList();
 		if (l != nullptr) {
-			screen.SetState<JustFailedState>();
+			for (auto c = l; c != nullptr; c = c->next) {
+				if (c->contact->IsTouching()) {
+					screen.SetState<JustFailedState>();
+				}
+			}
 		}
 	}
 
