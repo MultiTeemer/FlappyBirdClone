@@ -19,8 +19,8 @@ namespace FlappyBirdClone
 
 	void GameScreen::PlayingState::ProcessEvent(sf::Event& event)
 	{
-		if (event.type == sf::Event::EventType::KeyReleased) {
-			if (event.key.code == sf::Keyboard::Space) {
+		if (event.type == sf::Event::EventType::KeyReleased || event.type == sf::Event::EventType::MouseButtonReleased) {
+			if (event.key.code == sf::Keyboard::Space || event.mouseButton.button == sf::Mouse::Left) {
 				screen.gameWorld.player.body->SetLinearVelocity(b2Vec2(0, 0));
 				screen.gameWorld.player.body->SetAngularVelocity(0);
 				screen.gameWorld.player.body->ApplyLinearImpulseToCenter(b2Vec2(0, -160), false);
