@@ -43,10 +43,11 @@ namespace FlappyBirdClone
 
 	void GameScreen::InitializeGui(sf::RenderWindow& window)
 	{
-		auto scoreLabel = Ui.Add<sfg::Label>(scoreLabelId, std::to_string(gameWorld.progress.score));
-		scoreLabel->SetPosition(sf::Vector2f(5, 5));
-
 		const auto windowCenter = window.getDefaultView().getCenter();
+
+		auto scoreLabel = Ui.Add<sfg::Label>(scoreLabelId, std::to_string(gameWorld.progress.score));
+		scoreLabel->SetPosition(windowCenter);
+		scoreLabel->SetRequisition(sf::Vector2f(300, 300));
 
 		auto gamePausedLabel = Ui.Add<sfg::Label>(gamePausedLabelId, "PAUSED");
 		gamePausedLabel->SetPosition(windowCenter);
