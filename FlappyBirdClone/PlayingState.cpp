@@ -43,15 +43,17 @@ namespace FlappyBirdClone
 
 	void GameScreen::PlayingState::AdvanceProgress(float delta, float speed)
 	{
-		screen.gameWorld.progress.distance += delta * speed;
+		auto& world = screen.gameWorld;
+		const auto progress = delta * speed;
+		const auto shift = Converter::PixelsToMeters(progress);
 
-		const auto pos = screen.gameWorld.player.body->GetPosition();
-		screen.gameWorld.player.body->SetTransform(
-			b2Vec2(pos.x + Converter::PixelsToMeters(delta * speed), pos.y),
-			screen.gameWorld.player.body->GetAngle()
-		);
+		world.progress.distance += progress;
 
-		screen.gameWorld.obstaclesManager.Update();
+		world.MoveBody(world.player.body, shift);
+		world.MoveBody(world.topBorder, shift);
+		world.MoveBody(world.bottomBorder, shift);
+
+		world.obstaclesManager.Update();
 	}
 
 	void GameScreen::PlayingState::CheckObstaclesPassing()
@@ -84,7 +86,7 @@ namespace FlappyBirdClone
 
 	void GameScreen::PlayingState::UpdateWorld(float delta)
 	{
-		screen.gameWorld.world.Step(delta, 10, 10);
+		screen.gameWorld.Update(delta);
 
 		auto dy = screen.gameWorld.player.body->GetPosition().y - screen.gameWorld.player.prevPos.y;
 

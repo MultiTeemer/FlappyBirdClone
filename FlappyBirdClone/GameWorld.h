@@ -38,10 +38,11 @@ namespace FlappyBirdClone
 		GameWorld();
 		void Initialize(sf::RenderWindow& window);
 		void Render(sf::RenderWindow& window);
+		void Update(float delta);
+		void MoveBody(b2Body* body, float shift);
 		b2Body* createBox(int pos_x, int pos_y, int size_x, int size_y, b2BodyType type = b2_staticBody);
 
 	private:
-		void RenderBoundaries(sf::RenderWindow& window);
 		void RenderObstacles(sf::RenderWindow& window);
 		void RenderPlayer(sf::RenderWindow& window);
 

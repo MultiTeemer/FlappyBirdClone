@@ -47,20 +47,30 @@ namespace FlappyBirdClone
 
 	void GameWorld::Render(sf::RenderWindow& window)
 	{
-		RenderBoundaries(window);
 		RenderObstacles(window);
 		RenderPlayer(window);
 	}
 
-	void GameWorld::RenderBoundaries(sf::RenderWindow& window)
+	void GameWorld::Update(float delta)
 	{
-		RenderBody(topBorder, window);
-		RenderBody(bottomBorder, window);
+		world.Step(delta, 20, 10);
+	}
+
+	void GameWorld::MoveBody(b2Body* body, float shift)
+	{
+		const auto pos = body->GetPosition();
+		body->SetTransform(
+			b2Vec2(pos.x + shift, pos.y),
+			body->GetAngle()
+		);
 	}
 
 	void GameWorld::RenderObstacles(sf::RenderWindow& window)
 	{
 		const auto shift = sf::Vector2f(origin - progress.distance, 0);
+
+		RenderBody(topBorder, window, shift);
+		RenderBody(bottomBorder, window, shift);
 
 		for (auto& o : obstacles) {
 			RenderBody(o.topBody, window, shift);
